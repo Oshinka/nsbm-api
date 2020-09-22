@@ -56,7 +56,7 @@ studentSchema.statics.findByCredentials = async (email, password) => {
         const student = await Students.findOne({ email });
         if(!student)
             throw new Error();
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, student.password);
         if (!isMatch)
             throw new Error();
         return student;

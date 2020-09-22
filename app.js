@@ -5,10 +5,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+var SwaggerJsDoc = require('swagger-jsdoc');
+var SwaggerUi = require('swagger-ui-express');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var studentsRouter = require('./routes/students');
+var lecturersRouter = require('./routes/lecturers');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 var app = express();
 
@@ -24,8 +27,28 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/students', studentsRouter);
+app.use('/lecturers', lecturersRouter);
+
+// Extended: https://swagger.io/specification/
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'NSBM API',
+      description: 'Student LMS',
+      contact: {
+        name: 'Dumindu Oshinka',
+        url: 'https://www.linkedin.com/in/dumindu-oshinka-680490138/',
+        email: 'oshinka94@gmail.com'
+      },
+      servers: ["http://localhost:9000"]
+    }
+  },
+  apis: ['./routes/*.js']
+};
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', SwaggerUi.serve, SwaggerUi.setup(swaggerDocs));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
