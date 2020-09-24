@@ -14,7 +14,33 @@ const avatar = multer({
     }
 });
 
-/* POST create one student */
+/**
+ * @swagger
+ * /students:
+ *  post:
+ *   tags: ['Students']
+ *   summary: Use to request all students
+ *   requestBody: 
+ *    required: true
+ *    content:
+ *     application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *         name:
+ *          type: string
+ *         age:
+ *          type: int
+ *         email:
+ *          type: string
+ *         password:
+ *          type: string
+ *   produces:
+ *    application/json 
+ *   responses:
+ *    '201':
+ *      description: A new student has created
+ */
 router.post('/', async (req, res) => {
     const student = new Students(req.body);
     try{
@@ -62,10 +88,11 @@ router.get('/:id/avatar', async (req, res) => {
  * @swagger
  * /students:
  *  get:
- *   description: Use to request all students
+ *   tags: ['Students']
+ *   summary: Use to request all students
  *   responses:
  *    '200':
- *     description: A successful response
+ *      description: A successful response
  */
 router.get('/', async (req, res) => {
     try{

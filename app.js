@@ -11,7 +11,9 @@ var SwaggerUi = require('swagger-ui-express');
 var indexRouter = require('./routes/index');
 var studentsRouter = require('./routes/students');
 var lecturersRouter = require('./routes/lecturers');
-const swaggerJSDoc = require('swagger-jsdoc');
+var subjectsRouter = require('./routes/subjects');
+var swaggerJSDoc = require('swagger-jsdoc');
+var swaggerOptions = require('./swagger');
 
 var app = express();
 
@@ -29,24 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/students', studentsRouter);
 app.use('/lecturers', lecturersRouter);
+app.use('/subjects', subjectsRouter);
 
-// Extended: https://swagger.io/specification/
-const swaggerOptions = {
-  swaggerDefinition: {
-    info: {
-      title: 'NSBM API',
-      description: 'Student LMS',
-      contact: {
-        name: 'Dumindu Oshinka',
-        url: 'https://www.linkedin.com/in/dumindu-oshinka-680490138/',
-        email: 'oshinka94@gmail.com'
-      },
-      servers: ["http://localhost:9000"]
-    }
-  },
-  apis: ['./routes/*.js']
-};
-
+// swagger documentation
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 app.use('/api-docs', SwaggerUi.serve, SwaggerUi.setup(swaggerDocs));
 

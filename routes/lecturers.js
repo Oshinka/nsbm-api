@@ -62,7 +62,8 @@ router.get('/:id/avatar', async (req, res) => {
  * @swagger
  * /lecturers:
  *  get:
- *   description: Use to request all lecturers
+ *   tags: [Lecturers]
+ *   summary: Use to request all lecturers
  *   responses:
  *    '200':
  *     description: A successful response
