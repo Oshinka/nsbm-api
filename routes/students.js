@@ -1,6 +1,7 @@
 var express = require('express');
 var Students = require('../database/models/students');
 var multer = require('multer');
+const auth = require('../middleware/auth');
 var router = express.Router();
 
 const avatar = multer({
@@ -14,33 +15,7 @@ const avatar = multer({
     }
 });
 
-/**
- * @swagger
- * /students:
- *  post:
- *   tags: ['Students']
- *   summary: Use to request all students
- *   requestBody: 
- *    required: true
- *    content:
- *     application/json:
- *       schema:
- *        type: object
- *        properties:
- *         name:
- *          type: string
- *         age:
- *          type: int
- *         email:
- *          type: string
- *         password:
- *          type: string
- *   produces:
- *    application/json 
- *   responses:
- *    '201':
- *      description: A new student has created
- */
+/* POST create student */
 router.post('/', async (req, res) => {
     const student = new Students(req.body);
     try{
@@ -84,16 +59,7 @@ router.get('/:id/avatar', async (req, res) => {
     }
 });
 
-/**
- * @swagger
- * /students:
- *  get:
- *   tags: ['Students']
- *   summary: Use to request all students
- *   responses:
- *    '200':
- *      description: A successful response
- */
+/* GET students */
 router.get('/', async (req, res) => {
     try{
         const students = await Students.find({});
@@ -105,7 +71,23 @@ router.get('/', async (req, res) => {
     }
 });
 
-/* GET one student */
+/*
+ * @swagger
+ * /students/{id}:
+ *  parameters: [
+ *   name: id,
+ *   in: path,
+ *   required: true,
+ *   description: id of the student,
+ *   type: string
+ *  ]
+ *  get:
+ *   tags: ['Students']
+ *   summary: Get one student
+ *   responses:
+ *    '200':
+ *      description: A successful response
+ */
 router.get('/:id', async (req, res) => {
     try{
         const student = await Students.findById(req.params.id);
@@ -117,7 +99,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-/* PATCH update one student */
+/*PATCH Updata student */
 router.patch('/:id', async (req, res) => {
     try{
         const student = await Students.findByIdAndUpdate(
@@ -133,7 +115,19 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-/* DELETE student */
+/**
+ * @swagger
+ * /students/{id}:
+ *  delete:
+ *   tags: ['Students']
+ *   summary: Delete one student
+ *   responses:
+ *    '200':
+ *      description: A successful response
+ *      schema:
+ *       id:
+ *        type: string
+ */
 router.delete('/:id', async (req, res) => {
     try{
         const student = await Students.findByIdAndDelete(req.params.id);

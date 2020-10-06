@@ -23,7 +23,8 @@ const studentSchema = new mongoose.Schema({
         validate(value){
             if(!validator.isEmail(value))
                 throw new Error('Invalid email');
-        }
+        },
+        trim: true
     },
     password:{
         type:String,

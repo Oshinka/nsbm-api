@@ -5,7 +5,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
-var SwaggerJsDoc = require('swagger-jsdoc');
 var SwaggerUi = require('swagger-ui-express');
 
 var indexRouter = require('./routes/index');
