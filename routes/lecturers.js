@@ -58,7 +58,7 @@ router.get('/:id/avatar', async (req, res) => {
   }
 });
 
-/**
+/*
  * @swagger
  * /lecturers:
  *  get:

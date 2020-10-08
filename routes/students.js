@@ -71,23 +71,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-/*
- * @swagger
- * /students/{id}:
- *  parameters: [
- *   name: id,
- *   in: path,
- *   required: true,
- *   description: id of the student,
- *   type: string
- *  ]
- *  get:
- *   tags: ['Students']
- *   summary: Get one student
- *   responses:
- *    '200':
- *      description: A successful response
- */
+/* GET subjects */
 router.get('/:id', async (req, res) => {
     try{
         const student = await Students.findById(req.params.id);

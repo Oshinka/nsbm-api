@@ -1,3 +1,5 @@
+const Lecturers = require("./database/models/lecturers");
+
 const swaggerOptions = {
     swaggerDefinition: {
       info: {
@@ -89,9 +91,12 @@ const swaggerOptions = {
             responses: {
               200: {
                 description: 'Success!',
-                "schema": {
-                  "$ref": "#/definitions/Student"
-              }
+                schema: {
+                  $ref: '#/definitions/Student'
+                }
+              },
+              404: {
+                description: 'Not found'
               }
             }
           },
@@ -134,6 +139,228 @@ const swaggerOptions = {
               }
             }
           }
+        },
+        '/lecturers': {
+          post: {
+            tags: ['Lecturers'],
+            summary: 'Create new lecturer',
+            description: 'Add one lecturer',
+            consumes: 'application/json',
+            produces: 'application/json',
+            parameters: [
+              {
+                in: 'body',
+                name: 'body',
+                description: 'Lecturer object',
+                required: true,
+                schema: {
+                  $ref: '#/definitions/Lecturer'
+                }
+              }
+            ],
+            responses: {
+              201: {
+                description: 'New lecturer has created'
+              },
+              405: {
+                description: 'Invalid input'
+              }
+            }
+          },
+          get: {
+            tags: ['Lecturers'],
+            summary: 'Get lecturers',
+            description: 'Get all lecturers',
+            produces: 'application/json',
+            responses: {
+              200: {
+                description: 'Success!'
+              },
+              404: {
+                description: 'Not found'
+              }
+            }
+          }
+        },
+        '/lecturers/{id}': {
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'Lecturer Id',
+              required: true,
+              schema: {
+                $ref: '#/definitions/id'
+              }
+            }
+          ],
+          get: {
+            tags: ['Lecturers'],
+            summary: 'Get lecturer',
+            description: 'Get one lecturer',
+            produces: 'application/json',
+            responses: {
+              200: {
+                description: 'Success!',
+                schema: {
+                  $ref: '#/definitions/Lecturer'
+                }
+              },
+              404: {
+                description: 'Not found'
+              }
+            }
+          },
+          patch: {
+            tags: ['Lecturers'],
+            summary: 'Update lecturer',
+            description: 'Edit lecturer',
+            consumes: 'application/json',
+            produces: 'application/json',
+            parameters: [
+              {
+                in: 'body',
+                name: 'body',
+                description: 'Lecturer object',
+                required: true,
+                schema: {
+                  $ref: '#/definitions/Lecturer'
+                }
+              }
+            ],
+            responses: {
+              201: {
+                description: 'Lecturer has updated successfully'
+              },
+              404: {
+                description: 'Not found'
+              }
+            }
+          },
+          delete: {
+            tags: ['Lecturers'],
+            summary: 'Delete student',
+            description: 'Delete one student',
+            responses: {
+              200: {
+                description: 'OK'
+              },
+              404: {
+                description: 'Not found'
+              }
+            }
+          }
+        },
+        '/subjects': {
+          post : {
+            tags: ['Subjects'],
+            summary: 'Create new subject',
+            description: 'Add new subject',
+            consumes: 'application/json',
+            produces: 'application/json',
+            parameters: [
+              {
+                in: 'body',
+                name: 'body',
+                description: 'Subject object',
+                required: true,
+                schema: {
+                  $ref: '#/definitions/Subject'
+                }
+              }
+            ],
+            responses: {
+              201: {
+                description: 'New subject has created'
+              },
+              405: {
+                description: 'Invalid input'
+              }
+            }
+          },
+          get: {
+            tags: ['Subjects'],
+            summary: 'Get Subjects',
+            description: 'Get all subjects',
+            produces: 'application/json',
+            responses: {
+              200: {
+                description: 'Success!'
+              },
+              404: {
+                description: 'Not found'
+              }
+            }
+          }
+        },
+        '/subjects/{id}': {
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'Subject Id',
+              required: true,
+              schema: {
+                $ref: '#/definitions/id'
+              }
+            }
+          ],
+          get: {
+            tags: ['Subjects'],
+            summary: 'Get subject',
+            description: 'Get one subject',
+            produces: 'application/json',
+            responses: {
+              200: {
+                description: 'Success!',
+                schema: {
+                  $ref: '#/definitions/Subject'
+                }
+              },
+              404: {
+                description: 'Not found'
+              }
+            }
+          },
+          patch: {
+            tags: ['Subjects'],
+            summary: 'Update subject',
+            description: 'Edit subject',
+            consumes: 'application/json',
+            produces: 'application/json',
+            parameters: [
+              {
+                in: 'body',
+                name: 'body',
+                description: 'Subject object',
+                required: true,
+                schema: {
+                  $ref: '#/definitions/Subject'
+                }
+              }
+            ],
+            responses: {
+              201: {
+                description: 'Subject has updated successfully'
+              },
+              404: {
+                description: 'Not found'
+              }
+            }
+          },
+          delete: {
+            tags: ['Subjects'],
+            summary: 'Delete subject',
+            description: 'Delete subject by Id',
+            responses: {
+              200: {
+                description: 'OK'
+              },
+              404: {
+                description: 'Not found'
+              }
+            }
+          }
         }
       },
       definitions: {
@@ -158,6 +385,51 @@ const swaggerOptions = {
             },
             password: {
               type: 'string'
+            }
+          }
+        },
+        Lecturer: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string'
+            },
+            age: {
+              type: 'integer'
+            },
+            email: {
+              type: 'string'
+            },
+            password: {
+              type: 'string'
+            }
+          }
+        },
+        Subject: {
+          type: 'object',
+          properties: {
+            subjectCode: {
+              type: 'string'
+            },
+            name: {
+              type: 'string'
+            },
+            semester: {
+              type: 'integer'
+            },
+            isCompulsory: {
+              type: 'boolean'
+            },
+            credits: {
+              type: 'object',
+              properties: {
+                lecture: {
+                  type: 'integer'
+                },
+                practical: {
+                  type: 'integer'
+                }
+              }
             }
           }
         }

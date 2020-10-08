@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-/**
+/*
  * @swagger
  * /subjects:
  *  get:
