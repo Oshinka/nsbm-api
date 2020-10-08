@@ -99,19 +99,7 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-/**
- * @swagger
- * /students/{id}:
- *  delete:
- *   tags: ['Students']
- *   summary: Delete one student
- *   responses:
- *    '200':
- *      description: A successful response
- *      schema:
- *       id:
- *        type: string
- */
+/* DELETE student */
 router.delete('/:id', async (req, res) => {
     try{
         const student = await Students.findByIdAndDelete(req.params.id);

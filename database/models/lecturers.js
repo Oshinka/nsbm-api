@@ -7,6 +7,7 @@ const lecturerSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true,
+        max: 255,
         trim:true
     },
     age:{
@@ -20,6 +21,7 @@ const lecturerSchema = new mongoose.Schema({
     email:{
         type:String,
         required:true,
+        max: 255,
         validate(value){
             if(!validator.isEmail(value))
                 throw new Error('Invalid email');

@@ -1,5 +1,4 @@
 var express = require('express');
-const Students = require('../database/models/students');
 var Subjects = require('../database/models/subjects');
 var router = express.Router();
 
@@ -14,19 +13,15 @@ router.post('/', async (req, res) => {
     }
 });
 
-/*
- * @swagger
- * /subjects:
- *  get:
- *   tags: ['Subjects']
- *   summary: Use to request all subjects
- *   responses:
- *    '200':
- *      description: A successful response
- */
+/* GET subjects */
 router.get('/', async (req, res) => {
     try {
-        const subjects = await Subjects.find({});
+        var code = req.query.code;
+        if(code) {
+            var subjects = await Subjects.findOne({ subjectCode: code });
+        } else {
+            var subjects = await Subjects.find({});
+        }
         if(!subjects)
             return res.status(404).send();
         res.status(200).send(subjects);

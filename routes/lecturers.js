@@ -58,16 +58,7 @@ router.get('/:id/avatar', async (req, res) => {
   }
 });
 
-/*
- * @swagger
- * /lecturers:
- *  get:
- *   tags: [Lecturers]
- *   summary: Use to request all lecturers
- *   responses:
- *    '200':
- *     description: A successful response
- */
+/* GET lecturers */
 router.get('/', async (req, res) => {
   try{
       const lecturers = await Lecturers.find({});

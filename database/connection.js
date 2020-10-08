@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-const url = 'mongodb+srv://Dumindu:S2WgbLVpkYI8Yk8E@clustermdb.wdgcl.mongodb.net/nsbm?retryWrites=true&w=majority';
-mongoose.connect(url, {useUnifiedTopology:true ,useNewUrlParser:true, useCreateIndex:true})
+dotenv.config();
+
+mongoose.connect(process.env.DB_CONNECT, {useUnifiedTopology:true ,useNewUrlParser:true, useCreateIndex:true})
