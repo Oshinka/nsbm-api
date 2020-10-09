@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const studentSchema = new mongoose.Schema({
     name:{
@@ -48,7 +51,7 @@ const studentSchema = new mongoose.Schema({
 
 studentSchema.methods.generateAuthToken = async function () {
     const student = this;
-    const token = await jwt.sign({ _id: student._id.toString() }, 'thisisnsbm');
+    const token = await jwt.sign({ _id: student._id.toString() }, process.env.TOKEN_SECRET);
     student.tokens = student.tokens.concat({ token });
     await student.save();
     return token;

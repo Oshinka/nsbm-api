@@ -51,8 +51,8 @@ const swaggerOptions = {
               201: {
                 description: 'New student has created'
               },
-              405: {
-                description: 'Invalid input'
+              400: {
+                description: 'Already exist'
               }
             }
           },
@@ -162,8 +162,8 @@ const swaggerOptions = {
               201: {
                 description: 'New lecturer has created'
               },
-              405: {
-                description: 'Invalid input'
+              400: {
+                description: 'Already exist'
               }
             }
           },
@@ -273,8 +273,8 @@ const swaggerOptions = {
               201: {
                 description: 'New subject has created'
               },
-              405: {
-                description: 'Invalid input'
+              400: {
+                description: 'Already exist'
               }
             }
           },

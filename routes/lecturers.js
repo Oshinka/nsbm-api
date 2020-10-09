@@ -16,13 +16,19 @@ const avatar = multer({
 
 /* POST create one lecturer */
 router.post('/', async (req, res) => {
-  const lecturer = new Lecturers(req.body);
-  try{
-      const token = await lecturer.generateAuthToken();
-      res.status(201).send({lecturer, token});
-  } catch(e) {
-      res.status(400).send(e.message);
-  }
+    // Check that the lecturer is already exist
+    const isLecturerExist = await Lecturers.findOne({ email: req.body.email });
+    if(isLecturerExist)
+        return res.status(400).send('Lectuerer has been already exist. Please check the email');
+
+    // Create new lecturer
+    const lecturer = new Lecturers(req.body);
+    try{
+        const token = await lecturer.generateAuthToken();
+        res.status(201).send({lecturer, token});
+    } catch(e) {
+        res.status(400).send(e.message);
+    }
 });
 
 /* POST lecturer login */

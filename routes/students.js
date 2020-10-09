@@ -17,6 +17,12 @@ const avatar = multer({
 
 /* POST create student */
 router.post('/', async (req, res) => {
+    //Check that the student is already exist
+    const isStudentExist = await Students.findOne({ email: req.body.email });
+    if(isStudentExist)
+        return res.status(400).send('Student has been already exist. Please check the email');
+
+    // Create new student
     const student = new Students(req.body);
     try{
         const token = await student.generateAuthToken();

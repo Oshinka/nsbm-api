@@ -4,6 +4,12 @@ var router = express.Router();
 
 /* POST Create subject */
 router.post('/', async (req, res) => {
+    // Check that the subject is already exist
+    const isSubjectExist = await Subjects.findOne({ subjectCode: req.body.subjectCode });
+    if(isSubjectExist)
+        return res.status(400).send('Subject has been already exist. Please check the subject code');
+
+    // Create new subject
     try {
         const subject = new Subjects(req.body);
         await subject.save();
