@@ -7,19 +7,24 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const studentSchema = new mongoose.Schema({
-    name:{
+    firstName:{
         type:String,
         required:true,
         max: 255,
         trim:true
     },
-    age:{
-        type:Number,
-        required:true,
-        validate(value){
-            if(value < 0)
-                throw new Error('Age is not be negative');
-        }
+    lastName:{
+        type:String,
+        max: 255,
+        trim:true
+    },
+    gender:{
+        type:String,
+        required:true
+    },
+    dateOfBirth:{
+        type:Date,
+        required:true
     },
     email:{
         type:String,
@@ -30,6 +35,15 @@ const studentSchema = new mongoose.Schema({
                 throw new Error('Invalid email');
         },
         trim: true
+    },
+    contact:{
+        mobile:{
+            type:String,
+            required:true
+        },
+        fixed:{
+            type:String
+        }
     },
     password:{
         type:String,
@@ -43,7 +57,7 @@ const studentSchema = new mongoose.Schema({
         }
     }],
     avatar:{
-        type:Buffer
+        type:String
     }
 },{
     timestamps:true

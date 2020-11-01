@@ -38,8 +38,11 @@ const lecturerSchema = new mongoose.Schema({
             required: true
         }
     }],
+    position: {
+        type:String
+    },
     avatar:{
-        type:Buffer
+        type:String
     }
 },{
     timestamps:true
