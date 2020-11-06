@@ -63,3 +63,8 @@ const swaggerOptions = {
   };
 
   // Test
+
+  
+  req.body
+  req.query
+  req.header
