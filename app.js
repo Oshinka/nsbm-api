@@ -12,6 +12,7 @@ var studentsRouter = require('./routes/students');
 var lecturersRouter = require('./routes/lecturers');
 var subjectsRouter = require('./routes/subjects');
 var paymentsRouter = require('./routes/payments');
+var subscribersRouter = require('./routes/subscribers');
 var swaggerJSDoc = require('swagger-jsdoc');
 var swaggerOptions = require('./swagger');
 
@@ -33,6 +34,7 @@ app.use('/students', studentsRouter);
 app.use('/lecturers', lecturersRouter);
 app.use('/subjects', subjectsRouter);
 app.use('/payments', paymentsRouter);
+app.use('/subscribers', subscribersRouter);
 
 // swagger documentation
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
