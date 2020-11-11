@@ -4,7 +4,6 @@ const Students = require('../database/models/students');
 const auth = async (req, res, next) => {
     try {
         const token = req.header('Authorization');
-        console.log(token);
         const decode = await jwt.verify(token, 'thisisnsbm');
         const student = await Students.findOne({ _id: decode._id, 'tokens.token': token });
         if(!student)

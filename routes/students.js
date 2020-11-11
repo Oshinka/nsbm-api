@@ -77,10 +77,11 @@ router.get('/', async (req, res) => {
     }
 });
 
-/* GET subjects */
-router.get('/:id', async (req, res) => {
+/* GET one student */
+router.get('/me', auth, async (req, res) => {
     try{
-        const student = await Students.findById(req.params.id);
+        // const student = await Students.findById(req.params.id);
+        const student = req.student;
         if(!student)
             return res.status(404).send();
         res.status(200).send(student);
@@ -88,6 +89,17 @@ router.get('/:id', async (req, res) => {
         res.status(500).send(e.message);
     }
 });
+
+/* GET logout student */
+router.get('/logout', auth, async (req, res) => {
+    try {
+        req.student.tokens = req.student.tokens.filter(token => token.token !== req.token)
+        await req.student.save()
+        res.status(200).send(req.student)
+    } catch (e) {
+        res.status(500).send(e.message)
+    }
+})
 
 /*PATCH Updata student */
 router.patch('/:id', async (req, res) => {

@@ -81,7 +81,7 @@ studentSchema.statics.findByCredentials = async (email, password) => {
             throw new Error();
         return student;
     } catch(e) {
-        return "Invalid email and password.";
+        return "Invalid email or password.";
     }
 }
 
