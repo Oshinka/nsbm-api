@@ -14,6 +14,7 @@ var subjectsRouter = require('./routes/subjects');
 var paymentsRouter = require('./routes/payments');
 var pdfDocument = require('./routes/pdfGenerator');
 var qrCode = require('./routes/qrGenerator');
+var sms = require('./routes/smsGenerator');
 var subscribersRouter = require('./routes/subscribers');
 var swaggerJSDoc = require('swagger-jsdoc');
 var swaggerOptions = require('./swagger');
@@ -39,6 +40,7 @@ app.use('/payments', paymentsRouter);
 app.use('/subscribers', subscribersRouter);
 app.use('/receipt', pdfDocument);
 app.use('/qrcode', qrCode);
+app.use('/sms', sms);
 
 // swagger documentation
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
